@@ -1,6 +1,16 @@
-# Nuxt 3 Minimal Starter
+# Commer
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is a minimal starter template for building a whitelabel ecommerce application using Nuxt.js.
+
+## Features
+- [x] Nuxt.js
+- [x] Tailwind CSS
+- [x] RadixUI
+- [x] Pinia
+- [x] VeeValidate
+- [x] Vite
+- [x] TypeScript
+- [x] SSR
 
 ## Setup
 
@@ -71,5 +81,3 @@ yarn preview
 # bun
 bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
