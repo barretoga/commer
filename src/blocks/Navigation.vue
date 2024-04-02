@@ -1,0 +1,44 @@
+<script setup lang="ts">
+import { MenuItem } from '~/models/Menu';
+
+interface Props {
+  menuItems: MenuItem[]
+}
+
+defineProps<Props>()
+
+</script>
+
+<template>
+  <ul class="menu lg:menu-horizontal bg-base-200 rounded-box lg:mb-64">
+    <li
+      v-for="item in menuItems"
+      :key="item.path"
+    >
+      <a
+        v-if="!item?.children"
+        :href="item.path"
+      >
+        {{ item.name }}
+      </a>
+      <details
+        v-else
+      >
+        <summary> 
+          {{ item.name }}
+        </summary>
+          <ul>
+            <li
+              v-for="childrenItem in item.children"
+            >
+              <a
+                :href="childrenItem.path"
+              >
+                {{ childrenItem.name }}
+              </a>
+            </li>
+          </ul>
+      </details>
+    </li>
+  </ul>
+</template>
