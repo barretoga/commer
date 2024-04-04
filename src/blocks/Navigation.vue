@@ -19,12 +19,20 @@ defineProps<Props>()
         v-if="!item?.children"
         :href="item.path"
       >
+        <Icon
+          v-if="item.icon"
+          :icon=item.icon
+        />
         {{ item.name }}
       </a>
       <details
         v-else
       >
-        <summary> 
+        <summary>
+          <Icon
+            v-if="item.icon"
+            :icon=item.icon
+          />
           {{ item.name }}
         </summary>
           <ul>
