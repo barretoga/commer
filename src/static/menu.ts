@@ -9,19 +9,20 @@ export const menuItems: MenuItem[] = [
   {
     name: 'Produtos',
     path: '/products',
-    icon: 'bx:bxl-product-hunt',
+    icon: 'bx:store'
+  },
+  {
+    name: 'Perfil',
+    path: '/profile',
+    icon: 'bx:user',
     children: [
       {
-        name: 'Mesa Computador',
-        path: '/products/mesa',
+        name: 'Meu Perfil',
+        path: '/profile',
       },
       {
-        name: 'Colchão',
-        path: '/products/mesa',
-      },
-      {
-        name: 'Cadeira',
-        path: '/products/mesa',
+        name: 'Favoritos',
+        path: '/favorites',
       },
     ]
   }
