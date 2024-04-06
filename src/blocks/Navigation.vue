@@ -10,7 +10,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <ul class="menu lg:menu-horizontal bg-base-200 rounded-box lg:mb-64">
+  <ul class="menu lg:menu-horizontal lg:m-0 m-5 bg-base-200 rounded-box lg:mb-20">
     <li
       v-for="item in menuItems"
       :key="item.path"
