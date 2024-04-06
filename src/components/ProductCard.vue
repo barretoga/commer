@@ -53,7 +53,10 @@ const emit = defineEmits(['handleBuy', 'addToCart'])
             v-for="(color, index) in product.options.colors"
             type="button"
             :key="index"
-            :class="`bg-[${color}] w-10 h-10 border rounded-full`"
+            :style="{
+              'background-color': color
+            }"
+            class="w-10 h-10 border rounded-full"
           />
         </div>
       </div>
@@ -84,7 +87,7 @@ const emit = defineEmits(['handleBuy', 'addToCart'])
       
       <div class="card-actions justify-start items-center mt-2">
         <Button
-          class-type="secondary"
+          class="btn-neutral"
           @on-click="emit('addToCart')"
         >
           <Icon
