@@ -8,15 +8,12 @@ import { menuItems } from '~/static/menu'
 
 <template>
   <div class="grid mx-auto max-w-[1200px]">
-    <div class="flex justify-between mt-5">
-      <div>
-
-      </div>
+    <div class="flex flex-row-reverse lg:flex-row justify-center lg:justify-between items-center lg:items-start mt-5">
       <Navigation
         :menuItems="menuItems"
       />
       <div>
-
+        <!-- Profile photo goes here -->
       </div>
     </div>
     <RouterView />
