@@ -7,7 +7,7 @@ function returnActualYear () {
 
 <template>
   <div class="flex mt-20 py-10 flex-col border-t border-neutral">
-    <div class="flex gap-5">
+    <div class="flex lg:flex-row flex-col lg:mx-0 mx-5 gap-5">
       <div class="flex flex-col">
         <h1
           class="font-bold"
