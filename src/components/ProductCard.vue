@@ -40,7 +40,7 @@ function handleSize(size: string) {
 <template>
   <div class="card w-[20rem] glass">
     <figure>
-      <img
+      <Image
         :src="choosedOptions.colorIndex
           ?
           product.images[choosedOptions.colorIndex]
