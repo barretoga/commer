@@ -1,31 +1,54 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
+import { clothSizes } from '~/static/product-info';
 import { formatCurrencyToLocaleString } from '~/utils/formatValues';
 
 interface Props {
   product: {
     name: string
     description: string
-    price: number
+    prices: number[]
     amount: number
-    image: string
+    images: string[],
     options?: {
-      colors?: string[],
-      sizes?: string[],
+      availableColors?: string[],
+      availableSizes?: string[],
     }
   }
 }
 
-defineProps<Props>()
-
+const props = defineProps<Props>()
 const emit = defineEmits(['handleBuy', 'addToCart'])
+
+const choosedOptions = reactive({
+  colorIndex: 0,
+  size: '',
+})
+
+function handleColor(color: number) {
+  choosedOptions.colorIndex = color;
+}
+
+function handleSize(size: string) {
+  if (!props.product.options?.availableSizes?.includes(size)) {
+    return
+  }
+  choosedOptions.size = size;
+}
 </script>
 
 <template>
-  <div class="card w-[27rem] glass">
+  <div class="card w-[20rem] glass">
     <figure>
       <img
-        :src="product.image"
+        :src="choosedOptions.colorIndex
+          ?
+          product.images[choosedOptions.colorIndex]
+          :
+          product.images[0]
+        "
         :alt="product.name"
+        class="object-fill h-[16rem] w-full"
       />
     </figure>
     <div class="absolute right-2 inset-y-[14rem]">
@@ -39,7 +62,7 @@ const emit = defineEmits(['handleBuy', 'addToCart'])
       </h2>
       {{ product.description }}
       <div
-        v-if="product.options?.colors"
+        v-if="product.options?.availableColors"
       >
         <span
           class="font-bold"
@@ -50,51 +73,53 @@ const emit = defineEmits(['handleBuy', 'addToCart'])
           class="flex gap-x-2 my-3"
         >
           <button
-            v-for="(color, index) in product.options.colors"
-            type="button"
+            v-for="(color, index) in product.options.availableColors"
             :key="index"
             :style="{
               'background-color': color
             }"
-            class="w-10 h-10 border rounded-full"
+            :class="choosedOptions.colorIndex === index ? 'border-[0.2rem]' : ''"
+            type="button"
+            class="w-10 h-10 border rounded-full transition-all duration-100"
+            @click="handleColor(index)"
           />
         </div>
       </div>
       <div
-        v-if="product.options?.sizes"
+        v-if="product.options?.availableSizes"
         class="font-bold"
       >
         Tamanhos
         <div
-          class="flex gap-x-2 my-3"
+          class="flex gap-x-1 my-3"
         >
           <button
-            v-for="(size, index) in product.options.sizes"
-            type="button"
+            v-for="(size, index) in clothSizes"
             :key="index"
-            :class="`bg-neutral w-10 h-10 border rounded-full`"
+            :class="choosedOptions.size === size ? 'bg-primary text-white border-[0.2rem]' : ''"
+            class="bg-neutral w-10 h-10 border rounded-full relative transition-all duration-100"
+            type="button"
+            @click="handleSize(size)"
           >
             {{ size }}
+            <div
+              v-if="!product.options.availableSizes.includes(size)"
+              class="bg-red-500 h-[2.45rem] w-[0.2rem] absolute rotate-45 top-0 left-[18px]"
+            />
+            <div
+              v-if="!product.options.availableSizes.includes(size)"
+              class="bg-red-500 h-[2.45rem] w-[0.2rem] absolute -rotate-45 top-0 left-[18px]"
+            />
           </button>
         </div>
       </div>
       <div class="flex justify-between my-3 font-bold text-xl">
         Valor
-        <span>
-            {{ formatCurrencyToLocaleString(product.price) }}
+        <span class="transition duration-100">
+            {{ formatCurrencyToLocaleString(product.prices[choosedOptions.colorIndex]) }}
         </span>
       </div>
-      
       <div class="card-actions justify-start items-center mt-2">
-        <Button
-          class="btn-neutral"
-          @on-click="emit('addToCart')"
-        >
-          <Icon
-            icon="bx:cart-add"
-          />
-          Adicionar ao carrinho
-        </Button>
         <Button
           @on-click="emit('handleBuy')"
         >
@@ -102,6 +127,14 @@ const emit = defineEmits(['handleBuy', 'addToCart'])
             icon="bx:money"
           />
           Comprar agora
+        </Button>
+        <Button
+          class="btn-neutral"
+          @on-click="emit('addToCart')"
+        >
+          <Icon
+            icon="bx:cart-add"
+          />
         </Button>
       </div>
     </div>
