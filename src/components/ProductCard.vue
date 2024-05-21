@@ -48,10 +48,10 @@ function handleSize(size: string) {
           product.images[0]
         "
         :alt="product.name"
-        class="object-fill h-[16rem] w-full"
+        class="object-fill h-[15rem] w-full"
       />
     </figure>
-    <div class="absolute right-2 inset-y-[14rem]">
+    <div class="absolute right-2 inset-y-[12.6rem]">
       <Badge>
         {{ product.amount }} unidades disponíveis
       </Badge>
