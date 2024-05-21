@@ -7,10 +7,15 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Avatar: typeof import('./components/Avatar.vue')['default']
     Badge: typeof import('./components/Badge.vue')['default']
     Button: typeof import('./components/Button.vue')['default']
+    Carousel: typeof import('./components/Carousel.vue')['default']
+    Form: typeof import('./components/Form.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     Icon: typeof import('./components/Icon.vue')['default']
+    Image: typeof import('./components/Image.vue')['default']
+    InputText: typeof import('./components/InputText.vue')['default']
     ProductCard: typeof import('./components/ProductCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
