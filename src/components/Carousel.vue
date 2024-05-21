@@ -2,24 +2,31 @@
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
-import 'swiper/css/navigation';
+import 'swiper/css/navigation';;
 
 interface Props {
   slidesPerView: number
   spaceBetween: string
   slides: string[]
+  autoPlay?: {
+    delay: number
+    disableOnInteraction: boolean
+  } | undefined
 }
 
-defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  autoPlay: undefined
+})
 
+const emit = defineEmits(['slideChange', 'onSwiper'])
 const modules = [Autoplay, Navigation]
 
-function onSwiper(swiper: any) {
-  console.log(swiper)
+function onSwiper() {
+  emit('onSwiper')
 }
 
 function onSlideChange() {
-  console.log('slide change')
+  emit('slideChange')
 }
 </script>
 
@@ -27,10 +34,7 @@ function onSlideChange() {
   <swiper
     :slides-per-view
     :space-between
-    :autoplay="{
-      delay: 3500,
-      disableOnInteraction: false,
-    }"
+    :auto-play
     :modules
     @swiper="onSwiper"
     @slideChange="onSlideChange"
