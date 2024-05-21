@@ -31,6 +31,10 @@ const seasons = ref([
     <Carousel
       :slides="seasons"
       :slides-per-view="1"
+      :autoplay="{
+        delay: 3500,
+        disableOnInteraction: false,
+      }"
       space-between="30"
     />
   </div>
