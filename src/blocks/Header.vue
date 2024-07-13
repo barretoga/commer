@@ -10,7 +10,7 @@ const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications'])
 <template>
   <div class="flex justify-between gap-4 items-center mx-auto w-full pr-6">
     <Image
-      class="my-auto object-center mt-1 object-scale-down w-[170px] h-[100px]"
+      class="object-center mt-1 object-scale-down w-full max-w-[150px] h-[100px]"
       src="/logo-white.png"
     />
     <Navigation
