@@ -1,6 +1,6 @@
 interface NavigationItem {
   title: string
-  href: string
+  to: string
 }
 
 export interface Navigation extends NavigationItem {
