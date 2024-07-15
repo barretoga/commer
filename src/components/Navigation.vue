@@ -36,7 +36,6 @@ defineProps<Props>()
         </NavigationMenuLink>
         <NavigationMenuLink
           v-else
-          :class="navigationMenuTriggerStyle()"
         >
           <NavigationMenuTrigger
             class="font-bold"
