@@ -11,26 +11,26 @@ const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications'])
       @click="emit('toggleNotifications')"
     >
       <Icon
-        class="hover:text-slate-600 transition-all duration-300"
+        class="hover:text-slate-400 transition-all duration-300"
         width="1.5em"
         icon="bx:bell"
       />
     </button>
-    <a
-      href="/favorites"
+    <RouterLink
+      to="/favorites"
     >
       <Icon
-        class="hover:cursor-pointer hover:text-slate-600 transition-all duration-300"
+        class="hover:cursor-pointer hover:text-slate-400 transition-all duration-300"
         width="1.5em"
         icon="bx:heart"
       />
-    </a>
+    </RouterLink>
     <button
       type="button"
       @click="emit('toggleShoppingCart')"
     >
       <Icon
-        class="hover:text-slate-600 transition-all duration-300"
+        class="hover:text-slate-400 transition-all duration-300"
         width="1.5em"
         icon="bx:shopping-bag"
       />
