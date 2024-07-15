@@ -26,31 +26,36 @@ defineProps<Props>()
       >
         <NavigationMenuLink
           v-if="!item.subitems"
-          :href="item.href"
+          :to="item.to"
           :class="navigationMenuTriggerStyle()"
+          class="hover:cursor-pointer"
         >
-          {{ item.title }}
+          <p class="font-bold">
+            {{ item.title }}
+          </p>
         </NavigationMenuLink>
         <NavigationMenuLink
           v-else
           :class="navigationMenuTriggerStyle()"
         >
-          <NavigationMenuTrigger>
-            Produtos
+          <NavigationMenuTrigger
+            class="font-bold"
+          >
+            {{ item.title }}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul class="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[minmax(0,.75fr)_minmax(0,1fr)]">
+            <ul class="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-3">
               <li
                 v-for="subitem in item.subitems"
                 :key="subitem.title"
               >
                 <NavigationMenuLink as-child>
-                  <a
-                    :href="subitem.href"
+                  <RouterLink
+                    :to="subitem.to"
                     class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                   >
                     {{ subitem.title }}
-                  </a>
+                  </RouterLink>
                 </NavigationMenuLink>
               </li>
             </ul>

@@ -3,28 +3,32 @@ import { Navigation } from "@/models/Navigation";
 export const navigationItems: Navigation[] = [
   {
     title: 'Página inicial',
-    href: '/'
+    to: '/'
   },
   {
     title: 'Produtos',
-    href: '/',
+    to: '/',
     subitems: [
       {
         title: 'Masculino',
-        href: '/products/clothing-man'
+        to: '/products/clothing/man'
       },
       {
         title: 'Feminino',
-        href: '/products/clothing-woman'
+        to: '/products/clothing/woman'
+      },
+      {
+        title: 'Infantil',
+        to: '/products/clothing/kids'
       }
     ]
   },
   {
     title: 'Sobre',
-    href: '/about'
+    to: '/about'
   },
   {
     title: 'Contato',
-    href: '/contact'
+    to: '/contact'
   }
 ]

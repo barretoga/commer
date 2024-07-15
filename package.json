@@ -14,8 +14,11 @@
     "cy:open": "cypress open"
   },
   "dependencies": {
+    "@vueuse/core": "^10.11.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "embla-carousel-autoplay": "^8.1.6",
+    "embla-carousel-vue": "^8.1.6",
     "lucide-vue-next": "^0.408.0",
     "radix-vue": "^1.9.1",
     "tailwind-merge": "^2.4.0",
