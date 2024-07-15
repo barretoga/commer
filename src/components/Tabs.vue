@@ -17,10 +17,13 @@ const returnGridColsValue = computed(() => {
 </script>
 
 <template>
-  <Tabs class="w-[400px] ">
+  <Tabs
+    v-if="props.items.length"
+    class="w-[400px]"
+  >
     <TabsList 
-      class="grid w-full"
       :class="returnGridColsValue"
+      class="grid w-full"
     >
       <TabsTrigger
         v-for="item in items"
