@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { computed } from 'vue';
 
 interface Props {
   items: {
@@ -10,10 +9,6 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
-const returnGridColsValue = computed(() => {
-  return `grid-cols-${props.items.length}`
-})
 </script>
 
 <template>
@@ -22,8 +17,7 @@ const returnGridColsValue = computed(() => {
     class="w-[400px]"
   >
     <TabsList 
-      :class="returnGridColsValue"
-      class="grid w-full"
+      class="grid w-full grid-cols-3"
     >
       <TabsTrigger
         v-for="item in items"
