@@ -14,10 +14,10 @@ const props = defineProps<Props>()
 <template>
   <Tabs
     v-if="props.items.length"
-    class="w-[400px]"
+    class="w-full"
   >
     <TabsList 
-      class="grid w-full grid-cols-3"
+      class="grid w-full sm:grid-cols-3 h-full"
     >
       <TabsTrigger
         v-for="item in items"
