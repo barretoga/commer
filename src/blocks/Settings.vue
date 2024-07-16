@@ -8,6 +8,7 @@ const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications'])
   <div class="flex items-center gap-10 mr-4">
     <button
       type="button"
+      class="sm:block hidden"
       @click="emit('toggleNotifications')"
     >
       <Icon
@@ -17,6 +18,7 @@ const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications'])
       />
     </button>
     <RouterLink
+      class="sm:block hidden"
       to="/favorites"
     >
       <Icon

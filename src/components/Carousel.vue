@@ -60,7 +60,11 @@ onMounted(() => {
         </RouterLink>
       </CarouselItem>
     </CarouselContent>
-    <CarouselPrevious />
-    <CarouselNext />
+    <CarouselPrevious
+      class="sm:block hidden pl-2"
+    />
+    <CarouselNext
+      class="sm:block hidden pl-2"
+    />
   </Carousel>
 </template>
