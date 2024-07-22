@@ -22,3 +22,7 @@ export interface Product {
   imageUrl: string
   details: ProductDetails
 }
+
+export interface ShoppingCartItem extends Product {
+  amount: number
+}
