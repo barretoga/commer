@@ -1,10 +1,16 @@
 <script setup lang="ts">
+import Form from '@/components/Form.vue';
 import Icon from '@/components/Icon.vue';
 import Image from '@/components/Image.vue';
 import NumberInput from '@/components/NumberInput.vue';
+import { FormField } from '@/components/ui/form';
+import FormItem from '@/components/ui/form/FormItem.vue';
 import { useUserStore } from '@/store/user';
 import { formatCurrencyToLocaleString } from '@/utils/formatValues';
+import { useForm } from 'vee-validate';
 import { computed } from 'vue';
+import { toTypedSchema } from '@vee-validate/zod'
+import * as z from 'zod'
 
 interface Props {
   cartVisibility: boolean
@@ -22,14 +28,22 @@ function removeItem(id: number) {
 const cartItems = computed(() => {
   return userStore.$state.shoppingCart
 })
+
+const formSchema = toTypedSchema(z.object({
+  amount: z.number().min(1),
+}))
+
+const { setFieldValue } = useForm({
+  validationSchema: formSchema,
+})
 </script>
 
 <template>
   <aside
     v-if="cartVisibility"
-    class="fixed top-0 right-0 px-5 z-40 w-full bg-black/50 h-screen mt-[6.5rem] transition-transform translate-x-0"
+    class="fixed top-0 right-0 px-5 z-40 w-full bg-black/50 h-full mt-[6.5rem] transition-transform translate-x-0"
   >
-    <div class="h-full w-1/3 bg-white max-w-[600px] absolute right-0 p-5 overflow-y-auto">
+    <div class="h-full bg-white w-full sm:max-w-[600px] absolute right-0 p-5 overflow-y-auto">
       <button
         class="flex items-center border-b border-slate-800/10 w-full pb-2 hover:text-slate-500 transition-all duration-150 mb-9"
         type="button"
@@ -43,7 +57,7 @@ const cartItems = computed(() => {
       </button>
       <div class="flex items-center justify-between">
         <h1
-          class="text-xl font-bold"
+          class="text-xl font-bold pl-2"
         >
           Carrinho
         </h1>
@@ -56,36 +70,53 @@ const cartItems = computed(() => {
       <div
         v-for="(item, index) in cartItems"
         :key="index"
-        class="flex items-start justify-between m-2 my-4"
+        class="flex relative sm:flex-row flex-col items-center sm:items-start justify-center sm:justify-between m-2 my-4 sm:pr-10"
       >
         <Image
           :src="item.imageUrl"
-          class="max-w-[90px] max-h-[90px]"
+          class="max-h-[200px] object-contain sm:max-w-[90px] sm:max-h-[90px]"
         />
         <div
-          class="flex flex-col items-start w-[120px]"
+          class="flex flex-col items-start w-full sm:w-[120px] text-center sm:mt-0 mt-5"
         >
           <p
-            class="font-bold truncate max-w-[120px]"
+            class="font-bold truncate w-full sm:max-w-[120px]"
           >
             {{ item.name }}
           </p>
           <span
-            class="text-sm text-slate-400 mt-3"
+            class="text-sm sm:text-left w-full text-slate-400 mt-3"
           >
-            {{ item.id }}
+            COD: {{ item.id }}
           </span>
         </div>
-        <NumberInput
-          v-model="item.amount"
-          class="max-w-[100px] -mt-4"
-        />
+        <Form>
+          <FormField name="amount">
+            <FormItem>
+              <NumberInput
+                v-model="item.amount"
+                name="amount"
+                class="max-w-[100px] mt-1 mb-2 sm:-mt-4"
+                :min='0'
+                @update:model-value="(v) => {
+                  if (v) {
+                    setFieldValue('amount', v)
+                  }
+                  else {
+                    setFieldValue('amount', undefined)
+                  }
+                }"
+              />
+            </FormItem>
+          </FormField>
+        </Form>
         <span
-          class="font-bold"
+          class="font-bold sm:mb-0 mb-4"
         >
           {{ formatCurrencyToLocaleString(item.price.total) }}
         </span>
         <button
+          class="absolute right-0 -top-1 sm:-top-2 hover:text-slate-400 bg-slate-200 rounded-full hover:bg-slate-100 transition-all duration-150"
           type="button"
           @click="removeItem(item.id)"
         >
