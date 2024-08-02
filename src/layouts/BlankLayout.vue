@@ -12,20 +12,37 @@ const cartVisibility = ref(false);
 function toggleNotifications() {
   console.log('notifications')
 }
+
+function handleCartVisibility() {
+  if (menuVisibility.value) {
+    menuVisibility.value = !menuVisibility.value
+  }
+
+  cartVisibility.value = !cartVisibility.value
+}
+
+function handleMenuVisibility() {
+  if (cartVisibility.value) {
+    cartVisibility.value = !cartVisibility.value
+  }
+
+  menuVisibility.value = !menuVisibility.value
+}
 </script>
 
 <template>
   <div
-    :class="{ 'overflow-hidden max-h-[70%]': menuVisibility }"
+    :class="{ 'overflow-hidden': menuVisibility || cartVisibility }"
   >
     <Header
-      :menu-visibility="menuVisibility"
+      :menu-visibility
+      :cart-visibility
       @toggle-notifications="toggleNotifications"
-      @toggle-shopping-cart="cartVisibility = !cartVisibility"
-      @toggle-menu-visibility="menuVisibility = !menuVisibility"
+      @toggle-shopping-cart="handleCartVisibility"
+      @toggle-menu-visibility="handleMenuVisibility"
     />
     <main
-      class="flex mx-auto xl:container h-full mt-[7rem]"
+      class="flex mx-auto xl:container h-full mt-[7rem] no-scrollbar"
     >
       <SideMenu
         :menu-visibility
@@ -34,7 +51,7 @@ function toggleNotifications() {
       <RouterView />
       <ShoppingCart
         :cartVisibility
-        @toggle-shopping-cart="cartVisibility = !cartVisibility"
+        @toggle-shopping-cart="handleCartVisibility"
       />
     </main>
     <Footer/>
