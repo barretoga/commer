@@ -7,6 +7,7 @@ import Icon from '@/components/Icon.vue';
 
 interface Props {
   menuVisibility: boolean
+  cartVisibility: boolean
 }
 
 defineProps<Props>()
@@ -23,11 +24,13 @@ const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications', 'toggleMe
       >
         <Icon
           v-if="!menuVisibility"
+          class="hover:text-slate-400 transition-all duration-300"
           icon="bx:align-left"
           width="1.5em"
         />
         <Icon
           v-else
+          class="hover:text-slate-400 transition-all duration-300"
           icon="bx:x"
           width="1.5em"
         />
@@ -41,6 +44,7 @@ const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications', 'toggleMe
         class="md:block hidden"
       />
       <Settings
+        :cart-visibility
         @toggle-notifications="emit('toggleNotifications')"
         @toggle-shopping-cart="emit('toggleShoppingCart')"
       />
