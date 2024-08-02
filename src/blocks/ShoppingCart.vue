@@ -11,6 +11,7 @@ import { useForm } from 'vee-validate';
 import { computed } from 'vue';
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
+import Button from '@/components/Button.vue';
 
 interface Props {
   cartVisibility: boolean
@@ -126,9 +127,49 @@ const { setFieldValue } = useForm({
           />
         </button>
       </div>
-      <div
-        class="h-[200px]"
-      />
+      <div class="my-4 bg-primary/90 h-16 rounded-md text-white flex items-center justify-center">
+        <Icon
+          icon="mdi-light:truck"
+          width="1.5em"
+          class="mr-2"
+        />
+        <p>
+          Faltam
+          <span>
+            R$ 35,00
+          </span>
+          para o frete grátis!
+        </p>
+      </div>
+      <div class="flex justify-between my-3 border-b border-slate-300 pb-2">
+        <span class="text-md font-semibold">
+          Subtotal:
+        </span>
+        <p class="text-md font-semibold">
+          R$ 200,00
+        </p>
+      </div>
+      <div class="flex justify-between mt-2 mb-4">
+        <span class="text-xl font-semibold">
+          Total:
+        </span>
+        <p class="text-xl font-semibold">
+          R$ 200,00
+        </p>
+      </div>
+      <div class="flex items-center justify-center">
+        <span
+          class="text-sm font-bold"
+        >
+          Taxas e fretes calculados no carrinho
+        </span>
+      </div>
+      <Button
+        class="w-full mt-4 mb-[10rem] sm:mb-0"
+        title="Finalizar compra"
+      >
+        Ir para o checkout
+      </Button>
     </div>
   </aside>
 </template>
