@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import Icon from '@/components/Icon.vue';
 
+interface Props {
+  cartVisibility: boolean
+}
+
+defineProps<Props>()
+
 const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications'])
 </script>
 
@@ -32,10 +38,17 @@ const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications'])
       @click="emit('toggleShoppingCart')"
     >
       <Icon
+        v-if="!cartVisibility"
         class="hover:text-slate-400 transition-all duration-300"
         width="1.5em"
         icon="bx:shopping-bag"
       />
+      <Icon
+          v-else
+          class="hover:text-slate-400 transition-all duration-300"
+          icon="bx:x"
+          width="1.5em"
+        />
     </button>
   </div>
 </template>

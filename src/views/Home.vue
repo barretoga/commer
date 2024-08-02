@@ -14,7 +14,7 @@ import Products from '@/views/Home/Products.vue';
       />
     </div>
     <div
-      class="w-full md:min-w-[500px] lg:min-w-[800px] xl:max-w-[1000px] mx-auto"
+      class="w-full md:min-w-[500px] lg:min-w-[800px] xl:max-w-[1000px]"
     >
       <Products
         :tabs="tabs"
