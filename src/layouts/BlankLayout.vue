@@ -9,10 +9,6 @@ import { navigationItems } from '@/static/navigation'
 const menuVisibility = ref(false);
 const cartVisibility = ref(false);
 
-function toggleNotifications() {
-  console.log('notifications')
-}
-
 function handleCartVisibility() {
   if (menuVisibility.value) {
     menuVisibility.value = !menuVisibility.value

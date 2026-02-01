@@ -37,7 +37,7 @@ onMounted(() => {
 
 <template>
   <Carousel
-    class="relative w-full max-w-xs"
+    class="relative w-full"
     :plugins="[plugin]"
     @mouseenter="plugin.stop"
     @mouseleave="[plugin.reset(), plugin.play()];"
@@ -46,7 +46,7 @@ onMounted(() => {
       <CarouselItem
         v-for="(item, index) in items"
         :key="index"
-        class="h-64"
+        class="h-full"
       >
         <RouterLink
           :to="item.to"

@@ -9,6 +9,7 @@ interface Props {
 withDefaults(defineProps<Props>(),{
   type: 'submit'
 })
+
 const emit = defineEmits(['onClick'])
 </script>
 

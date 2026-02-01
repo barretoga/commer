@@ -4,6 +4,7 @@ import { createPinia } from 'pinia'
 import router from '@/routes'
 
 import './assets/index.css'
+import 'vue-sonner/style.css'
 
 const pinia = createPinia()
 

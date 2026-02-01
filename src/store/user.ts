@@ -1,5 +1,4 @@
 import { ShoppingCartItem } from "@/models/Product";
-import { products } from "@/static/home";
 import { defineStore } from 'pinia'
 
 interface State {
