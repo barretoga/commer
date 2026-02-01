@@ -1,128 +1,234 @@
 <script setup lang="ts">
-import Accordion from '@/components/Accordion.vue';
+import { ref } from 'vue';
+import Icon from '@/components/Icon.vue';
 import Image from '@/components/Image.vue';
+
+const email = ref('');
+
+const footerSections = [
+  {
+    title: 'Institucional',
+    links: [
+      { label: 'Sobre Nós', href: '#' },
+      { label: 'Nossa História', href: '#' },
+      { label: 'Trabalhe Conosco', href: '#' },
+      { label: 'Sustentabilidade', href: '#' },
+    ]
+  },
+  {
+    title: 'Atendimento',
+    links: [
+      { label: 'Central de Ajuda', href: '#' },
+      { label: 'Trocas e Devoluções', href: '#' },
+      { label: 'Entregas', href: '#' },
+      { label: 'Formas de Pagamento', href: '#' },
+    ]
+  },
+  {
+    title: 'Políticas',
+    links: [
+      { label: 'Política de Privacidade', href: '#' },
+      { label: 'Termos de Uso', href: '#' },
+      { label: 'Cookies', href: '#' },
+      { label: 'Segurança', href: '#' },
+    ]
+  }
+];
+
+const socialLinks = [
+  { icon: 'mdi:instagram', href: 'https://instagram.com', label: 'Instagram' },
+  { icon: 'mdi:facebook', href: 'https://facebook.com', label: 'Facebook' },
+  { icon: 'mdi:twitter', href: 'https://twitter.com', label: 'Twitter' },
+  { icon: 'mdi:pinterest', href: 'https://pinterest.com', label: 'Pinterest' },
+  { icon: 'mdi:youtube', href: 'https://youtube.com', label: 'YouTube' },
+];
+
+const paymentMethods = [
+  { icon: 'logos:visa', label: 'Visa' },
+  { icon: 'logos:mastercard', label: 'Mastercard' },
+  { icon: 'logos:amex', label: 'American Express' },
+  { icon: 'simple-icons:pix', label: 'Pix' },
+  { icon: 'mdi:barcode', label: 'Boleto' },
+];
+
+function handleNewsletterSubmit() {
+  if (email.value) {
+    console.log('Newsletter subscription:', email.value);
+    email.value = '';
+  }
+}
 </script>
 
 <template>
-  <footer>
-    <Accordion
-      class="w-full lg:px-0 px-[1rem] lg:w-[1000px] mx-auto"
-    >
-      <template #title>
-        <p
-          class="font-bold uppercase text-slate-600 transition-all duration-150"
-        >
-          Sobre a Commer ®
-        </p>
-      </template>
-      <template #content>
-        <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-          <div class="md:flex md:justify-between">
-            <div class="mb-6 md:mb-0">
-              <a
-                href="#"
+  <footer class="bg-gradient-to-b mt-5 from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 border-t border-gray-200 dark:border-gray-800">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+        
+        <div class="lg:col-span-2">
+          <a href="/" class="inline-block mb-6 group">
+            <Image
+              class="object-center object-scale-down w-full max-w-[180px] h-[80px] transition-transform duration-300 group-hover:scale-105"
+              src="/logo-white.png"
+              alt="Commer Logo"
+            />
+          </a>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-6 leading-relaxed max-w-sm">
+            Moda e estilo que transformam. Descubra as últimas tendências em roupas e acessórios com qualidade premium e design exclusivo.
+          </p>
+          
+          <div class="mb-6">
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-3">
+              Newsletter
+            </h3>
+            <p class="text-xs text-gray-600 dark:text-gray-400 mb-3">
+              Receba novidades e ofertas exclusivas
+            </p>
+            <form @submit.prevent="handleNewsletterSubmit" class="flex gap-2">
+              <input
+                v-model="email"
+                type="email"
+                placeholder="Seu e-mail"
+                required
+                class="flex-1 px-4 py-2.5 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100 focus:border-transparent outline-none transition-all duration-200"
+              />
+              <button
+                type="submit"
+                class="px-5 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-sm hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5"
               >
-                <Image
-                  class="object-center mt-1 object-scale-down w-full max-w-[150px] h-[100px]"
-                  src="/logo-white.png"
-                />
+                <Icon icon="mdi:send" width="1.2em" />
+              </button>
+            </form>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-3">
+              Redes Sociais
+            </h3>
+            <div class="flex gap-3">
+              <a
+                v-for="social in socialLinks"
+                :key="social.label"
+                :href="social.href"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-gray-900 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                :aria-label="social.label"
+              >
+                <Icon :icon="social.icon" width="1.3em" />
               </a>
             </div>
-            <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-              <div>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  Sobre nós
-                </h2>
-                  <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                    <li class="mb-4">
-                      <a
-                        href="#"
-                        class="hover:underline"
-                      >
-                        Contato
-                      </a>
-                    </li>
-                    <li class="mb-4">
-                      <a
-                        href="#"
-                        class="hover:underline"
-                      >
-                        SAC
-                      </a>
-                    </li>
-                  </ul>
-              </div>
-              <div>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  Siga-me
-                </h2>
-                <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                  <li class="mb-4">
-                    <a
-                      href="https://github.com/barretoga"
-                      class="hover:underline"
-                    >
-                      Github
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://www.linkedin.com/in/gabrielbarretogasparelo/"
-                      class="hover:underline"
-                    >
-                      Linkedin
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Privacidade</h2>
-                <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                  <li class="mb-4">
-                    <a href="#" class="hover:underline">Política de privacidade</a>
-                  </li>
-                  <li>
-                    <a href="#" class="hover:underline">Termos &amp; Condições</a>
-                  </li>
-                </ul>
+          </div>
+        </div>
+
+        <div
+          v-for="section in footerSections"
+          :key="section.title"
+          class="lg:col-span-1"
+        >
+          <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+            {{ section.title }}
+          </h3>
+          <ul class="space-y-3">
+            <li v-for="link in section.links" :key="link.label">
+              <a
+                :href="link.href"
+                class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-200 inline-flex items-center group"
+              >
+                <span class="relative">
+                  {{ link.label }}
+                  <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-900 dark:bg-white transition-all duration-300 group-hover:w-full"></span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div>
+            <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider mb-3">
+              Formas de Pagamento
+            </h4>
+            <div class="flex flex-wrap gap-3">
+              <div
+                v-for="payment in paymentMethods"
+                :key="payment.label"
+                class="w-12 h-8 flex items-center justify-center bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500 transition-all duration-200 hover:shadow-md"
+                :title="payment.label"
+              >
+                <Icon :icon="payment.icon" width="1.8em" />
               </div>
             </div>
           </div>
-          <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+          
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 px-4 py-2 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+              <Icon icon="mdi:shield-check" class="text-green-600 dark:text-green-400" width="1.5em" />
+              <span class="text-xs font-medium text-green-700 dark:text-green-300">
+                Compra Segura
+              </span>
+            </div>
+            <div class="flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+              <Icon icon="mdi:truck-fast" class="text-blue-600 dark:text-blue-400" width="1.5em" />
+              <span class="text-xs font-medium text-blue-700 dark:text-blue-300">
+                Frete Grátis*
+              </span>
+            </div>
+          </div>
         </div>
-      </template>
-    </Accordion>
-    <div class="my-2 mx-auto px-[2rem] sm:py-0 pb-5 pt-2 sm:flex sm:items-center sm:justify-between justify-center h-[5rem]">
-      <span class="text-sm w-full sm:mt-0 mt-5 pr-4 text-gray-500 dark:text-gray-400">
-        © {{ new Date().getFullYear() }}
-        <a
-          href="https://github.com/barretoga/commer"
-          class="hover:underline"
-        >
-          Commer™
-        </a>
-        . All Rights Reserved.
-      </span>
-      <div class="flex mt-4 justify-center sm:mt-0">
-        <a
-          href="#"
-          class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
-        >
-          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
-            <path fill-rule="evenodd" d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" clip-rule="evenodd"/>
-          </svg>
-            <span class="sr-only">Twitter page</span>
-        </a>
-        <a
-          href="https://github.com/barretoga/commer"
-          class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
-        >
-          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd"/>
-          </svg>
-          <span class="sr-only">GitHub account</span>
-        </a>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50">
+      <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-center sm:text-left">
+          <p class="text-xs text-gray-600 dark:text-gray-400">
+            © {{ new Date().getFullYear() }}
+            <a
+              href="https://github.com/barretoga/commer"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            >
+              Commer™
+            </a>
+            . Todos os direitos reservados.
+          </p>
+          <div class="flex items-center justify-center gap-4 text-xs text-gray-600 dark:text-gray-400">
+            <a href="#" class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+              CNPJ: 00.000.000/0001-00
+            </a>
+            <span class="hidden sm:inline">•</span>
+            <a
+              href="https://github.com/barretoga/commer"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-1 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            >
+              <Icon icon="mdi:github" width="1em" />
+              Open Source
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </footer>
 </template>
+
+<style scoped>
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+footer {
+  animation: slideIn 0.5s ease-out;
+}
+</style>
