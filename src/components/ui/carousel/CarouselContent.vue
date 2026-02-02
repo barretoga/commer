@@ -13,11 +13,11 @@ const { carouselRef, orientation } = useCarousel()
 </script>
 
 <template>
-  <div ref="carouselRef" class="overflow-hidden">
+  <div ref="carouselRef" class="overflow-hidden h-full">
     <div
       :class="
         cn(
-          'flex',
+          'flex h-full',
           orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
           props.class,
         )"
