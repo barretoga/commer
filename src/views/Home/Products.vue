@@ -8,6 +8,7 @@ import { Product, ShoppingCartItem } from '@/models/Product';
 import { formatCurrencyToLocaleString } from '@/utils/formatValues';
 import { toast } from '@/utils/toast';
 import { useUserStore } from '@/store/user';
+import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 
 interface Props {
@@ -20,9 +21,14 @@ interface Props {
 
 defineProps<Props>();
 
+const router = useRouter();
 const userStore = useUserStore();
 const favorites = ref<number[]>([]);
 const hoveredProduct = ref<number | null>(null);
+
+function navigateToProduct(productId: number) {
+  router.push(`/product/${productId}`);
+}
 
 function toggleFavorite(productId: number) {
   const index = favorites.value.indexOf(productId);
@@ -82,9 +88,10 @@ function isLowStock(stock: number): boolean {
       <div
         v-for="product in products"
         :key="product.id"
-        class="group relative flex flex-col bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100 hover:border-primary/20"
+        class="group relative flex flex-col bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100 hover:border-primary/20 cursor-pointer"
         @mouseenter="hoveredProduct = product.id"
         @mouseleave="hoveredProduct = null"
+        @click="navigateToProduct(product.id)"
       >
         <div class="relative overflow-hidden bg-slate-50">
           <Image

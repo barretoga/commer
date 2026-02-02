@@ -36,6 +36,11 @@ const routes: RouteLayout[] = [
         path: '/products/accessories',
         name: 'accessories',
         component: () => import('@/views/categories/Accessories.vue'),
+      },
+      {
+        path: '/product/:id',
+        name: 'product-detail',
+        component: () => import('@/views/ProductDetail.vue'),
       }
     ]
   }
