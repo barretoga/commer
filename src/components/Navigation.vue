@@ -26,13 +26,17 @@ defineProps<Props>()
       >
         <NavigationMenuLink
           v-if="!item.subitems"
-          :to="item.to"
-          :class="navigationMenuTriggerStyle()"
-          class="hover:cursor-pointer"
+          as-child
         >
-          <p class="font-bold">
-            {{ item.title }}
-          </p>
+          <RouterLink
+            :to="item.to"
+            :class="navigationMenuTriggerStyle()"
+            class="hover:cursor-pointer"
+          >
+            <p class="font-bold">
+              {{ item.title }}
+            </p>
+          </RouterLink>
         </NavigationMenuLink>
         <NavigationMenuLink
           v-else
