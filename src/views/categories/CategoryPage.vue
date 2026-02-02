@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue';
 import Icon from '@/components/Icon.vue';
 import Button from '@/components/Button.vue';
-import Products from '@/views/Home/Products.vue';
+import Products from '@/views/products/Products.vue';
 import { products } from '@/static/home';
 import type { Product } from '@/models/Product';
 
@@ -301,7 +301,6 @@ const hasActiveFilters = computed(() => {
 
           <div v-if="filteredProducts.length > 0">
             <Products
-              :tabs="[]"
               :products="filteredProducts"
             />
           </div>

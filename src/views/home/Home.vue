@@ -1,9 +1,20 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import Carousel from '@/components/Carousel.vue';
 import Icon from '@/components/Icon.vue';
 import Button from '@/components/Button.vue';
 import { highlights, products, tabs } from '@/static/home';
-import Products from '@/views/Home/Products.vue';
+import Products from '@/views/products/Products.vue';
+
+const featuredProductsSection = ref<HTMLElement | null>(null);
+
+function scrollToFeaturedProducts() {
+  featuredProductsSection.value?.scrollIntoView({ 
+    behavior: 'smooth', 
+    block: 'start' 
+  });
+}
+
 
 const categories = [
   {
@@ -86,22 +97,25 @@ const collections = [
 <template>
   <div class="w-full">
     <section class="relative w-full mb-12">
-      <div class="w-full max-w-[1400px] mx-auto">
+      <div class="w-full">
         <Carousel
           :items="highlights"
-          class="w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-none md:rounded-2xl overflow-hidden shadow-2xl"
+          class="w-full h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px] rounded-none overflow-hidden shadow-2xl"
         />
       </div>
       
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div class="text-center text-white px-4 animate-fade-in">
-          <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 drop-shadow-2xl">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none bg-black/20">
+        <div class="text-center text-white px-4 sm:px-6 md:px-8 animate-fade-in max-w-4xl">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 md:mb-6 drop-shadow-2xl leading-tight">
             Moda que Transforma
           </h1>
-          <p class="text-lg md:text-xl lg:text-2xl mb-8 drop-shadow-lg">
+          <p class="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 drop-shadow-lg">
             Descubra seu estilo único
           </p>
-          <Button class="pointer-events-auto bg-white text-gray-900 hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300">
+          <Button 
+            class="pointer-events-auto bg-white text-gray-900 hover:bg-gray-100 px-6 sm:px-8 py-3 sm:py-4 md:py-6 text-base sm:text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300"
+            @click="scrollToFeaturedProducts"
+          >
             Explorar Agora
           </Button>
         </div>
@@ -206,7 +220,7 @@ const collections = [
       </div>
     </section>
 
-    <section class="max-w-7xl mx-auto px-4 mb-16">
+    <section ref="featuredProductsSection" class="max-w-7xl mx-auto px-4 mb-16">
       <div class="text-center mb-10">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
           Produtos em Destaque
@@ -238,7 +252,7 @@ const collections = [
             required
             class="flex-1 px-6 py-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-200"
           />
-          <Button class="bg-white text-gray-900 hover:bg-gray-100 px-8 py-4 font-semibold whitespace-nowrap transform hover:scale-105 transition-all duration-300">
+          <Button class="bg-white h-full text-gray-900 hover:bg-gray-100 px-8 py-5 font-semibold whitespace-nowrap transform hover:scale-105 transition-all duration-300">
             Inscrever-se
           </Button>
         </form>
