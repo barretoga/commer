@@ -49,7 +49,7 @@ onMounted(() => {
         class="h-full"
       >
         <RouterLink
-          :to="item.to"
+          :to="item.to || ''"
           class="hover:cursor-pointer"
         >
           <Image

@@ -33,7 +33,6 @@ function handleMenuVisibility() {
     <Header
       :menu-visibility
       :cart-visibility
-      @toggle-notifications="toggleNotifications"
       @toggle-shopping-cart="handleCartVisibility"
       @toggle-menu-visibility="handleMenuVisibility"
     />
