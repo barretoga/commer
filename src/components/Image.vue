@@ -19,6 +19,7 @@ withDefaults(defineProps<Props>(), {
     :alt
     :title
     :src
-    class="w-full"
+    :width
+    :height
   >
 </template>
