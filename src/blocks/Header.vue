@@ -4,14 +4,17 @@ import Navigation from '@/components/Navigation.vue';
 import Settings from '@/blocks/Settings.vue';
 import Image from '@/components/Image.vue';
 import Icon from '@/components/Icon.vue';
+import { useRouter } from 'vue-router';
 
 interface Props {
   menuVisibility: boolean
   cartVisibility: boolean
+  unreadNotifications?: number
 }
 
 defineProps<Props>()
 const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications', 'toggleMenuVisibility'])
+const router = useRouter()
 </script>
 
 <template>
@@ -36,8 +39,10 @@ const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications', 'toggleMe
         />
       </button>
       <Image
-        class="object-center mt-1 object-scale-down w-full max-w-[150px] h-[100px]"
+        class="object-center mt-1 object-scale-down w-full max-w-[150px] h-[100px] cursor-pointer"
         src="/logo-white.png"
+        alt="Logo"
+        @click="router.push('/')"
       />
       <Navigation
         :items="navigationItems"
@@ -45,6 +50,7 @@ const emit = defineEmits(['toggleShoppingCart', 'toggleNotifications', 'toggleMe
       />
       <Settings
         :cart-visibility
+        :unread-notifications
         @toggle-notifications="emit('toggleNotifications')"
         @toggle-shopping-cart="emit('toggleShoppingCart')"
       />
