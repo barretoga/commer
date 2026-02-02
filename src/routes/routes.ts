@@ -15,7 +15,7 @@ const routes: RouteLayout[] = [
       {
         path: '/',
         name: 'home',
-        component: () => import('@/views/Home.vue'),
+        component: () => import('@/views/home/Home.vue'),
       },
       {
         path: '/products/clothing/man',
@@ -40,7 +40,22 @@ const routes: RouteLayout[] = [
       {
         path: '/product/:id',
         name: 'product-detail',
-        component: () => import('@/views/ProductDetail.vue'),
+        component: () => import('@/views/products/ProductDetail.vue'),
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: () => import('@/views/about/About.vue'),
+      },
+      {
+        path: '/contact',
+        name: 'contact',
+        component: () => import('@/views/contact/Contact.vue'),
+      },
+      {
+        path: '/favorites',
+        name: 'favorites',
+        component: () => import('@/views/favorites/Favorites.vue'),
       }
     ]
   }
